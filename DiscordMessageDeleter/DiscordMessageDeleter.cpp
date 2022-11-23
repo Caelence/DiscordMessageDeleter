@@ -1,12 +1,15 @@
 ﻿#include <string>
 #include <iostream>
 #include <json/value.h>
+#include <cpr/cpr.h>
 #include <vector>
 #include <random>
+#include <chrono>
+#include <thread>
 #include "Discord.h"
 #include "getInfo.h"
-#include <cpr/cpr.h>
-#include <Windows.h>
+
+using namespace std::literals::chrono_literals;
 
 int main() {
 	printStart();
@@ -32,11 +35,11 @@ int main() {
 		Json::Value message;
 
 		if (messageBatch.at(0) == "404") {
-			std::cout << "[!] - An incorrect channel ID was set. Please try running the program again with a valid channel ID." << std::endl;
+			std::cerr << "[!] - An incorrect channel ID was set. Please try running the program again with a valid channel ID." << std::endl;
 			return 1;
 		}
 		else if (messageBatch.at(0) == "") {
-			std::cout << "[!] - Unable to fetch messages. Might be an issue with the internet." << std::endl;
+			std::cerr << "[!] - Unable to fetch messages. Might be an issue with the internet." << std::endl;
 			return 1;
 		}
 		else if (messageBatch.at(0) == "Done") {
@@ -50,6 +53,15 @@ int main() {
 
 				if (message.isMember("call")) {
 					std::cout << "[+] - Found call at ID: " << message["id"] << ", skipping" << std::endl;
+					continue;
+				}
+
+				if (message["type"].asString() == "1") {
+					std::cout << "[+] - Found added user at ID: " << message["id"] << ", skipping" << std::endl;
+					continue;
+				}
+				else if (message["type"].asString() == "2") {
+					std::cout << "[+] - Found removed user at ID: " << message["id"] << ", skipping" << std::endl;
 					continue;
 				}
 
@@ -69,21 +81,18 @@ int main() {
 
 						std::cout << "[!] - Rate limited 3 times now, taking a break for: " << randNum << " seconds" << std::endl;
 
-						Sleep(randNum * 1000);
+						std::this_thread::sleep_for(randNum * 1000ms);
 					}
 					else {
 						std::cout << "[!] - Rate limited, waiting " << discordDeleter.rateLimit << " seconds" << std::endl;
 
-						Sleep(discordDeleter.rateLimit * 1000);
+						std::this_thread::sleep_for(discordDeleter.rateLimit * 1000ms);
 					}
 
 					i--;
 				}
 
-				if (discordDeleter.amountToDelete == 0) {
-					continue;
-				}
-				else if (discordDeleter.deletedMessages == discordDeleter.amountToDelete) {
+				if (discordDeleter.deletedMessages == discordDeleter.amountToDelete) {
 					break;
 				}
 			}
@@ -97,6 +106,4 @@ int main() {
 	std::cout << "--------------------------------------------------------------------------------------------------------------" << std::endl;
 	std::cout << "[+] - Done deleting all messages [" << discordDeleter.deletedMessages << "] in channel " << discordDeleter.channelID << std::endl;
 	std::cout << "--------------------------------------------------------------------------------------------------------------" << std::endl;
-
-	system("pause");
 }
