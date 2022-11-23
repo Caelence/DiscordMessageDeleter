@@ -31,7 +31,7 @@ bool Discord::testToken() {
 		return false;
 	}
 	else {
-		std::cout << testToken.status_code << std::endl;
+		//std::cerr << testToken.status_code << std::endl;
 		return false;
 	}
 }
@@ -158,7 +158,7 @@ bool Discord::deleteMesssage(std::string messageID) {
 		return false;
 	}
 	else {
-		std::cout << deletedMessage.status_code << std::endl;
+		//std::cerr << deletedMessage.status_code << std::endl;
 		return false;
 	}
 }
