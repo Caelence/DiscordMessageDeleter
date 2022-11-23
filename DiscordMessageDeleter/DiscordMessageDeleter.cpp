@@ -7,7 +7,9 @@
 #include <chrono>
 #include <thread>
 #include "Discord.h"
+#include "printStartEnd.h"
 #include "getInfo.h"
+#include "channelID.h"
 
 using namespace std::literals::chrono_literals;
 
@@ -102,8 +104,6 @@ int main() {
 			break;
 		}
 	}
-	
-	std::cout << "--------------------------------------------------------------------------------------------------------------" << std::endl;
-	std::cout << "[+] - Done deleting all messages [" << discordDeleter.deletedMessages << "] in channel " << discordDeleter.channelID << std::endl;
-	std::cout << "--------------------------------------------------------------------------------------------------------------" << std::endl;
+
+	printEnd(discordDeleter);
 }
