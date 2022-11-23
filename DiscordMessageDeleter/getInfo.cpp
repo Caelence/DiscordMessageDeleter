@@ -26,7 +26,7 @@ bool getTestToken(Discord& discordDeleter) {
 		std::cout << "--------------------------------------------------------------------------------------------------------------" << std::endl;
 	}
 	else {
-		std::cout << "[!] - Token is invalid - exiting" << std::endl;
+		std::cerr << "[!] - Token is invalid - exiting" << std::endl;
 		std::cout << "--------------------------------------------------------------------------------------------------------------" << std::endl;
 		return false;
 	}
@@ -56,7 +56,7 @@ bool getMessagesToDelete(Discord& discordDeleter) {
 		if (amountToDelete > 0)
 			discordDeleter.amountToDelete = { amountToDelete };
 		else {
-			std::cout << "[!] - Invalid amount entered. Please enter a number higher than 0" << std::endl;
+			std::cerr << "[!] - Invalid amount entered. Please enter a number higher than 0" << std::endl;
 			getMessagesToDelete(discordDeleter);
 		}
 	}
@@ -64,7 +64,7 @@ bool getMessagesToDelete(Discord& discordDeleter) {
 		discordDeleter.amountToDelete = { 0 };
 	}
 	else {
-		std::cout << "[!] - Please enter a valid option and try again." << std::endl;
+		std::cerr << "[!] - Please enter a valid option and try again." << std::endl;
 		return false;
 	}
 
@@ -89,7 +89,7 @@ bool manualChannelID(Discord& discordDeleter) {
 		getChannel(discordDeleter);
 	}
 	else {
-		std::cout << "[!] - Please enter a valid option and try again." << std::endl;
+		std::cerr << "[!] - Please enter a valid option and try again." << std::endl;
 		return false;
 	}
 
@@ -116,7 +116,7 @@ bool usernamesOrGroups(Discord& discordDeleter) {
 		}
 	}
 	else {
-		std::cout << "[!] - Please enter a valid option and try again." << std::endl;
+		std::cerr << "[!] - Please enter a valid option and try again." << std::endl;
 		return false;
 	}
 
@@ -139,7 +139,7 @@ bool validateResponse(Discord& discordDeleter, int& selection, bool usernameOrGr
 			std::cout << "--------------------------------------------------------------------------------------------------------------" << std::endl;
 		}
 		else {
-			std::cout << "[!] - Please enter a valid option and try again." << std::endl;
+			std::cerr << "[!] - Please enter a valid option and try again." << std::endl;
 			return false;
 		}
 	}
@@ -158,7 +158,7 @@ bool validateResponse(Discord& discordDeleter, int& selection, bool usernameOrGr
 			std::cout << "--------------------------------------------------------------------------------------------------------------" << std::endl;
 		}
 		else {
-			std::cout << "[!] - Please enter a valid option and try again." << std::endl;
+			std::cerr << "[!] - Please enter a valid option and try again." << std::endl;
 			return false;
 		}
 	}
@@ -179,6 +179,7 @@ bool getUsernames(Discord& discordDeleter) {
 			}
 		}
 
+		discordDeleter.dmUsernamesTotal--;
 		int userSelection{};
 
 		std::cout << "--------------------------------------------------------------------------------------------------------------" << std::endl;
@@ -191,7 +192,7 @@ bool getUsernames(Discord& discordDeleter) {
 		}
 	}
 	else {
-		std::cout << "[!] - Unable to get channels from Discord API. Please try enter the channel ID manually." << std::endl;
+		std::cerr << "[!] - Unable to get channels from Discord API. Please try enter the channel ID manually." << std::endl;
 		getChannel(discordDeleter);
 	}
 
@@ -211,6 +212,7 @@ bool getGroups(Discord& discordDeleter) {
 			}
 		}
 
+		discordDeleter.dmGroupsTotal--;
 		int groupSelection{};
 
 		std::cout << "--------------------------------------------------------------------------------------------------------------" << std::endl;
@@ -223,7 +225,7 @@ bool getGroups(Discord& discordDeleter) {
 		}
 	}
 	else {
-		std::cout << "[!] - Unable to get channels from Discord API. Please try enter the channel ID manually." << std::endl;
+		std::cerr << "[!] - Unable to get channels from Discord API. Please try enter the channel ID manually." << std::endl;
 		getChannel(discordDeleter);
 	}
 
