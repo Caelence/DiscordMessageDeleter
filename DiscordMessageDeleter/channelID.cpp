@@ -3,7 +3,7 @@
 bool manualChannelID(Discord& discordDeleter) {
 	char manuallyEnterID{};
 
-	std::cout << "Do you want to manually enter the channel ID? (y/N): ";
+	std::cout << "Do you want to manually enter the channel ID? (y/N Default = N): ";
 	std::cin.ignore();
 	std::cin.get(manuallyEnterID);
 	manuallyEnterID = std::toupper(manuallyEnterID);
@@ -28,7 +28,7 @@ bool manualChannelID(Discord& discordDeleter) {
 bool usernamesOrGroups(Discord& discordDeleter) {
 	char usernameOrGroup{};
 
-	std::cout << "Do you want to choose from usernames or groups? (U/g): ";
+	std::cout << "Do you want to choose from usernames or groups? (U/g Default = U): ";
 	std::cin.get(usernameOrGroup);
 	usernameOrGroup = std::toupper(usernameOrGroup);
 
