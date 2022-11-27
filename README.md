@@ -15,6 +15,14 @@ This is not the fault of the app, but a safety feature implimented on Discord's 
 ## How to use:
 Please head over to [the wiki](https://github.com/Caelence/DiscordMessageDeleter/wiki) for guidance on how to use the application.
 
+## How to build:
+Building this application for Windows is simple. 
+- Make sure you're using [Visual Studio 2022](https://visualstudio.microsoft.com/vs/community/) or newer.
+- Make sure you have [vcpkg](https://github.com/Microsoft/vcpkg) installed. If not, you will have to manually build and compile each of the libraries used in this project. 
+- Install the libraries through ``vcpkg``. I have included ``Cpp-base64`` already in the project. So, only get  [Libcpr](https://github.com/libcpr/cpr#building-cpr---using-vcpkg), and [JsonCPP](https://github.com/open-source-parsers/jsoncpp#the-vcpkg-dependency-manager).
+That should be all that's needed to build this project. It's pretty straightforward, especially if using ``vcpkg.``
+>If you're not on Windows, you'll unfortunately have to figure this out for yourself. 
+
 ## Future plans:
 Below are some things I consider adding to this app in the future. 
 - Command line usage. (Able to call the app ffrom the command line with options)
