@@ -6,4 +6,5 @@ void getToken(Discord& discordDeleter);
 void getChannel(Discord& discordDeleter);
 
 bool getTestToken(Discord& discordDeleter);
+bool getTestChannel(Discord& discordDeleter);
 bool getMessagesToDelete(Discord& discordDeleter);
