@@ -9,7 +9,7 @@ bool Discord::testToken() {
 		cpr::Header{ {"authority", "discord.com"},
 					 {"authorization", token},
 					 {"accept-language", "en-GB"},
-					 {"user-agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) discord/0.0.309 Chrome/83.0.4103.122 Electron/9.3.5 Safari/537.36"},
+					 {"user-agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) discord/1.0.9007 Chrome/91.0.4472.164 Electron/13.6.6 Safari/537.36"},
 					 {"accept", "*/*"} });
 
 	if (testToken.status_code == 200) {
@@ -36,12 +36,29 @@ bool Discord::testToken() {
 	}
 }
 
+bool Discord::testChannel() {
+	cpr::Response testChannel = cpr::Get(cpr::Url{ "https://discord.com/api/v10/channels/" + channelID },
+		cpr::Header{ {"authority", "discord.com"},
+					 {"authorization", token},
+					 {"accept-language", "en-GB"},
+					 {"user-agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) discord/1.0.9007 Chrome/91.0.4472.164 Electron/13.6.6 Safari/537.36"},
+					 {"accept", "*/*"} });
+
+	if (testChannel.status_code == 200) {
+		return true;
+	}
+	else {
+		//std::cerr << testChannel.status_code << std::endl;
+		return false;
+	}
+}
+
 bool Discord::getChannels() {
 	cpr::Response dmChannels = cpr::Get(cpr::Url{ "https://discord.com/api/v10/users/@me/channels" },
 		cpr::Header{ {"authority", "discord.com"},
 					 {"authorization", token},
 					 {"accept-language", "en-GB"},
-					 {"user-agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) discord/0.0.309 Chrome/83.0.4103.122 Electron/9.3.5 Safari/537.36"},
+					 {"user-agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) discord/1.0.9007 Chrome/91.0.4472.164 Electron/13.6.6 Safari/537.36"},
 					 {"accept", "*/*"} });
 
 	Json::Value dmChannelsJson{ stringToJson(dmChannels.text) };
@@ -99,7 +116,7 @@ std::vector<Json::Value> Discord::getRecentMessages() {
 			cpr::Header{ {"authority", "discord.com"},
 						 {"authorization", token},
 						 {"accept-language", "en-GB"},
-						 {"user-agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) discord/0.0.309 Chrome/83.0.4103.122 Electron/9.3.5 Safari/537.36"},
+						 {"user-agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) discord/1.0.9007 Chrome/91.0.4472.164 Electron/13.6.6 Safari/537.36"},
 						 {"accept", "*/*"},
 						 {"referer", "https://discord.com/channels/@me"} },
 			cpr::Parameters{ {"limit", "100"} });
@@ -109,7 +126,7 @@ std::vector<Json::Value> Discord::getRecentMessages() {
 			cpr::Header{ {"authority", "discord.com"},
 						 {"authorization", token},
 						 {"accept-language", "en-GB"},
-						 {"user-agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) discord/0.0.309 Chrome/83.0.4103.122 Electron/9.3.5 Safari/537.36"},
+						 {"user-agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) discord/1.0.9007 Chrome/91.0.4472.164 Electron/13.6.6 Safari/537.36"},
 						 {"accept", "*/*"},
 						 {"referer", "https://discord.com/channels/@me"} },
 			cpr::Parameters{ {"limit", "100"}, {"before", lastMessage} });
@@ -145,7 +162,7 @@ bool Discord::deleteMesssage(std::string messageID) {
 		cpr::Header{ {"authority", "discord.com"},
 					 {"authorization", token},
 					 {"accept-language", "en-GB"},
-					 {"user-agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) discord/0.0.309 Chrome/83.0.4103.122 Electron/9.3.5 Safari/537.36"},
+					 {"user-agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) discord/1.0.9007 Chrome/91.0.4472.164 Electron/13.6.6 Safari/537.36"},
 					 {"accept", "*/*"} });
 
 	if (deletedMessage.status_code == 204) {
