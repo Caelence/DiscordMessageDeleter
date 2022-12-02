@@ -132,19 +132,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ArgsHandler.cpp" />
     <ClCompile Include="base64.cpp" />
     <ClCompile Include="channelID.cpp" />
     <ClCompile Include="Discord.cpp" />
     <ClCompile Include="DiscordMessageDeleter.cpp" />
     <ClCompile Include="getInfo.cpp" />
+    <ClCompile Include="handleArgsOrNoArgs.cpp" />
     <ClCompile Include="printStartEnd.cpp" />
     <ClCompile Include="stringToJson.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ArgsHandler.h" />
     <ClInclude Include="base64.h" />
     <ClInclude Include="channelID.h" />
     <ClInclude Include="Discord.h" />
     <ClInclude Include="getInfo.h" />
+    <ClInclude Include="handleArgsOrNoArgs.h" />
     <ClInclude Include="printStartEnd.h" />
     <ClInclude Include="stringToJson.h" />
   </ItemGroup>
