@@ -35,6 +35,7 @@ public:
 	      {}
 
 	bool testToken();
+	bool testChannel();
 	bool deleteMesssage(std::string messageID);
 	bool getChannels();
 	std::string getUserID();
