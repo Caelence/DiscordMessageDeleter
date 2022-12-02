@@ -104,7 +104,15 @@ bool ArgsHandler::handler(Discord& discordDeleter) {
 void ArgsHandler::handleH() {
 	setHelp = { true };
 
-	std::cout << "Help." << std::endl;
+	std::cout << "-h\tHelp\t\tDisplays this menu." << std::endl;
+	std::cout << "-v\tVersion\t\tGet the current version." << std::endl;
+	std::cout << "-t\tToken\t\tPut your Discord Token after this." << std::endl;
+	std::cout << "-c\tChannelID\tPut the ChannelID you want to delete messages from after this." << std::endl;
+	std::cout << "-a\tAll\t\tDelete all messsages in the specified channel." << std::endl;
+	std::cout << "-q\tQuantity\tDelete a certain quantity of messages in the specified channel." << std::endl;
+	std::cout << "\nA minimum of three arguments must be specified for the app to function." << std::endl;
+	std::cout << "E.g. -t Mha14651652adas.2a6sd1d... -c 11111111111111 -a" << std::endl;
+	std::cout << "E.g. -t Mha14651652adas.2a6sd1d... -c 11111111111111 -q 50" << std::endl;
 }
 
 void ArgsHandler::handleV() {
