@@ -15,8 +15,16 @@ using namespace std::literals::chrono_literals;
 int main(int argc, char** argv) {
 	Discord discordDeleter;
 
-	if (argsOrNoArgs(argc, argv, discordDeleter)) {
-		return 1;
+	switch (argsOrNoArgs(argc, argv, discordDeleter)) {
+		case 0:
+			return 0;
+			break;
+		case 1:
+			return 1;
+			break;
+		case 2:
+			return 0;
+			break;
 	}
 
 	while (true) {
