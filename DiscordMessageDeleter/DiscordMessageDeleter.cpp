@@ -8,29 +8,16 @@
 #include <thread>
 #include "Discord.h"
 #include "printStartEnd.h"
-#include "getInfo.h"
-#include "channelID.h"
+#include "handleArgsOrNoArgs.h"
 
 using namespace std::literals::chrono_literals;
 
-int main() {
-	printStart();
-
+int main(int argc, char** argv) {
 	Discord discordDeleter;
-	getToken(discordDeleter);
-	if (!getTestToken(discordDeleter)) {
-		std::cerr << "[!] - Unable to validate token. Perhaps the internet is out, or the token is incorrect." << std::endl;
-		return 1;
-	}
-	if (!manualChannelID(discordDeleter)) {
-		std::cerr << "[!] - Unable to get the channel ID. Perhaps the internet is out, or an invalid channel ID was selected/entered." << std::endl;
-		return 1;
-	}
-	if (!getMessagesToDelete(discordDeleter)) {
-		std::cerr << "[!] - Unable to get the amount of messages to delete. Perhaps you entered an invalid amount." << std::endl;
-	}
 
-	std::cout << "--------------------------------------------------------------------------------------------------------------" << std::endl;
+	if (argsOrNoArgs(argc, argv, discordDeleter)) {
+		return 1;
+	}
 
 	while (true) {
 		std::vector<Json::Value> messageBatch{ discordDeleter.getRecentMessages() };
@@ -53,17 +40,24 @@ int main() {
 
 			if (discordDeleter.getUserID() == message["author"]["id"].asString()) {
 
-				if (message.isMember("call")) {
-					std::cout << "[+] - Found call at ID: " << message["id"] << ", skipping" << std::endl;
-					continue;
-				}
-
 				if (message["type"].asString() == "1") {
 					std::cout << "[+] - Found added user at ID: " << message["id"] << ", skipping" << std::endl;
 					continue;
 				}
 				else if (message["type"].asString() == "2") {
 					std::cout << "[+] - Found removed user at ID: " << message["id"] << ", skipping" << std::endl;
+					continue;
+				} 
+				else if (message.isMember("call")) {
+					std::cout << "[+] - Found call at ID: " << message["id"] << ", skipping" << std::endl;
+					continue;
+				}
+				else if (message["type"].asString() == "4") {
+					std::cout << "[+] - Found Channel Name Change at ID: " << message["id"] << ", skipping" << std::endl;
+					continue;
+				}
+				else if (message["type"].asString() == "5") {
+					std::cout << "[+] - Found Channel Icon Change at ID: " << message["id"] << ", skipping" << std::endl;
 					continue;
 				}
 
