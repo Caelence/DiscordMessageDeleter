@@ -6,4 +6,4 @@
 #include "getInfo.h"
 #include "channelID.h"
 
-bool argsOrNoArgs(int& argc, char** argv, Discord& discordDeleter);
+int argsOrNoArgs(int& argc, char** argv, Discord& discordDeleter);
