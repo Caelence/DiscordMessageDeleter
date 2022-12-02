@@ -27,11 +27,25 @@ bool getTestToken(Discord& discordDeleter) {
 	return true;
 }
 
+bool getTestChannel(Discord& discordDeleter) {
+	if (discordDeleter.testToken()) {
+		std::cout << "[+] - ChannelID is valid" << std::endl;
+		std::cout << "--------------------------------------------------------------------------------------------------------------" << std::endl;
+	}
+	else {
+		std::cerr << "[!] - ChannelID is invalid - exiting" << std::endl;
+		std::cout << "--------------------------------------------------------------------------------------------------------------" << std::endl;
+		return false;
+	}
+
+	return true;
+}
+
 bool getMessagesToDelete(Discord& discordDeleter) {
 	int amountToDelete{};
 	char deleteAllMessages{};
 
-	std::cout << "Do you want to delete all messages sent by you? (y/N): ";
+	std::cout << "Do you want to delete all messages sent by you? (y/N Default = N): ";
 	std::cin.ignore();
 	std::cin.get(deleteAllMessages);
 	deleteAllMessages = std::toupper(deleteAllMessages);
