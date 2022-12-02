@@ -32,7 +32,7 @@ Below are some things I consider adding to this app in the future.
 - Expand on the previously added feature by also giving the option for displaying servers.
 
 ## Going forward:
-As I have no implimented everything into this application that I want, I won't be adding anything for now. That might/will change in the future, and any requests will be read. So, please submit suggestions if you have any. As of now, I just cannot think of ways to improve this.
+As I have now implimented everything into this application that I want, I won't be adding anything for now. That might/will change in the future, and any requests will be read. So, please submit suggestions if you have any. As of now, I just cannot think of ways to improve this.
 
 ## Suggestions:
 Please feel free to leave me any suggestions in the ``issues`` section on this repository. I'll be happy to try and impliment ideas submitted by other users.
