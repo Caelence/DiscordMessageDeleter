@@ -1,6 +1,6 @@
 #include "handleArgsOrNoArgs.h"
 
-bool argsOrNoArgs(int& argc, char** argv, Discord& discordDeleter) {
+int argsOrNoArgs(int& argc, char** argv, Discord& discordDeleter) {
 	ArgsHandler args(argc, argv);
 
 	if (args.noArgs == true) {
@@ -21,6 +21,7 @@ bool argsOrNoArgs(int& argc, char** argv, Discord& discordDeleter) {
 		}
 		if (!getMessagesToDelete(discordDeleter)) {
 			std::cerr << "[!] - Unable to get the amount of messages to delete. Perhaps you entered an invalid amount." << std::endl;
+			return 1;
 		}
 
 		std::cout << "--------------------------------------------------------------------------------------------------------------" << std::endl;
@@ -31,13 +32,11 @@ bool argsOrNoArgs(int& argc, char** argv, Discord& discordDeleter) {
 		}
 
 		if (args.setHelp || args.setVersion) {
-			return 0;
+			return 2;
 		}
 
 		if (!args.setToken || !args.setChannel || !args.setAmount) {
-			return 1;
+			return 0;
 		}
 	}
-
-	return 0;
 }
