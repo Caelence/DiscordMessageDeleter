@@ -39,4 +39,6 @@ int argsOrNoArgs(int& argc, char** argv, Discord& discordDeleter) {
 			return 0;
 		}
 	}
+
+	return 3;
 }
